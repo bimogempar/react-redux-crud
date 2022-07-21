@@ -39,21 +39,17 @@ export default function Todo() {
 
     return (
         <div>
-            <button className="p-2 bg-blue-200" onClick={() => setAddModalOpen(true)}>New To Do</button>
+            <button className="p-2 bg-blue-200 my-4" onClick={() => setAddModalOpen(true)}>New To Do</button>
             {
                 loading ? <div>Loading...</div> :
-                    <table>
-                        <tbody>
-                            {todos.map((todo, i) => (
-                                <tr key={i}>
-                                    <td>{todo.title}</td>
-                                    <td>
-                                        <button onClick={() => handleClickEdit(todo)}>Edit</button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    todos.map((todo, i) => (
+                        <div key={i}>
+                            <div className="flex justify-between space-x-24">
+                                <div>{todo.title}</div>
+                                <button onClick={() => handleClickEdit(todo)}>Edit</button>
+                            </div>
+                        </div>
+                    ))
             }
             <EditTodoModal editModalOpen={editModalOpen} setEditModalOpen={setEditModalOpen} handleDelete={handleDelete} />
             <DeleteTodoModal deleteModalOpen={deleteModalOpen} setDeleteModalOpen={setDeleteModalOpen} />
