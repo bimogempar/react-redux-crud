@@ -6,6 +6,7 @@ import AddTodoModal from '../Modal/AddTodo'
 
 export default function Todo() {
     const { todos } = useSelector(state => state.todos)
+    console.log(todos)
     const loading = useSelector(state => state.todos.loading)
 
     const [editModalOpen, setEditModalOpen] = React.useState(false)
