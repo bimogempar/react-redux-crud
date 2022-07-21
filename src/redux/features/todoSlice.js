@@ -18,6 +18,13 @@ const todoSlice = createSlice({
         addToDo(state, action) {
             state.todos.push(action.payload);
         },
+        updateToDo(state, action) {
+            const { id, title, description, status } = action.payload;
+            const todo = state.todos.find(todo => todo.id === id);
+            todo.title = title;
+            todo.description = description;
+            todo.status = status;
+        },
         removeToDo(state, action) {
             state.todos = state.todos.filter(todo => todo.id !== action.payload.id);
         }
@@ -36,6 +43,6 @@ const todoSlice = createSlice({
     }
 })
 
-export const { addToDo } = todoSlice.actions;
+export const { addToDo, updateToDo, removeToDo } = todoSlice.actions;
 export default todoSlice.reducer
 

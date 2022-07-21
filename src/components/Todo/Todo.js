@@ -6,12 +6,22 @@ import AddTodoModal from '../Modal/AddTodo'
 
 export default function Todo() {
     const { todos } = useSelector(state => state.todos)
-    console.log(todos)
+    // console.log(todos)
     const loading = useSelector(state => state.todos.loading)
 
-    const [editModalOpen, setEditModalOpen] = React.useState(false)
+    const [editModalOpen, setEditModalOpen] = React.useState({
+        open: false,
+        todo: {}
+    })
     const [deleteModalOpen, setDeleteModalOpen] = React.useState(false)
     const [addModalOpen, setAddModalOpen] = React.useState(false)
+
+    const handleClickEdit = (e) => {
+        setEditModalOpen({
+            open: true,
+            todo: e
+        })
+    }
 
     return (
         <div>
@@ -20,12 +30,12 @@ export default function Todo() {
                 loading ? <div>Loading...</div> :
                     <table>
                         <tbody>
-                            {todos.map(({ id, title }, i) => (
+                            {todos.map((todo, i) => (
                                 <tr key={i}>
-                                    <td>{title}</td>
+                                    <td>{todo.title}</td>
                                     <td>
                                         <button onClick={() => setDeleteModalOpen(true)}>Delete</button>
-                                        <button onClick={() => setEditModalOpen(true)}>Edit</button>
+                                        <button onClick={() => handleClickEdit(todo)}>Edit</button>
                                     </td>
                                 </tr>
                             ))}

@@ -21,7 +21,7 @@ export default function AddTodo({ addModalOpen, setAddModalOpen, }) {
     }
 
     const handleClickAddTodo = () => {
-        if (field.title !== undefined && field.description.length !== undefined) {
+        if (field.title !== undefined && field.description !== undefined) {
             dispatch(
                 addToDo({
                     id: todoAmount + 1,
