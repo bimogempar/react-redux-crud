@@ -15,6 +15,9 @@ const todoSlice = createSlice({
     name: "todo",
     initialState,
     reducers: {
+        addToDo(state, action) {
+            state.todos.push(action.payload);
+        }
     },
     extraReducers: {
         [fetchTodos.pending]: (state, action) => {
@@ -30,5 +33,6 @@ const todoSlice = createSlice({
     }
 })
 
+export const { addToDo } = todoSlice.actions;
 export default todoSlice.reducer
 
