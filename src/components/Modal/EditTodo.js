@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateToDo } from '../../redux/features/todoSlice'
 
-export default function EditTodo({ editModalOpen, setEditModalOpen, }) {
+export default function EditTodo({ editModalOpen, setEditModalOpen, handleDelete }) {
     const [title, setTitle] = React.useState('')
     const [description, setDescription] = React.useState('')
     const [errorResp, setError] = React.useState('')
@@ -58,7 +58,10 @@ export default function EditTodo({ editModalOpen, setEditModalOpen, }) {
                 {/* The actual dialog panel  */}
                 <Dialog.Panel className="mx-auto max-w-sm rounded bg-white">
                     <div className='m-5'>
-                        <h1 className='text-2xl font-bold'>Add To Do List</h1>
+                        <div className="flex justify-between">
+                            <h1 className='text-2xl font-bold'>Add To Do List</h1>
+                            <button className='bg-red-300 p-2' onClick={() => handleDelete(editModalOpen.todo)}>Delete</button>
+                        </div>
                         <div className='mt-5'>
                             <div>
                                 <label htmlFor="title">Title</label>
@@ -68,7 +71,7 @@ export default function EditTodo({ editModalOpen, setEditModalOpen, }) {
                                 <label htmlFor="description">Description</label>
                                 <input type='text' className='w-full p-2 border border-gray-400' name="description" placeholder='Description' onChange={handleChangeDescription} value={description === undefined ? '' : description} />
                             </div>
-                            <div className='flex justify-end my-2'>
+                            <div className='flex justify-end my-4'>
                                 <button onClick={handleClickUpdateTodo} className='p-1 bg-blue-200'>Update To Do</button>
                             </div>
                             {errorResp && <p className="text-red-500 text-sm mb-5">{errorResp}</p>}

@@ -13,11 +13,25 @@ export default function Todo() {
         open: false,
         todo: {}
     })
-    const [deleteModalOpen, setDeleteModalOpen] = React.useState(false)
+    const [deleteModalOpen, setDeleteModalOpen] = React.useState({
+        open: false,
+        todo: {}
+    })
     const [addModalOpen, setAddModalOpen] = React.useState(false)
 
     const handleClickEdit = (e) => {
         setEditModalOpen({
+            open: true,
+            todo: e
+        })
+    }
+
+    const handleDelete = (e) => {
+        setEditModalOpen({
+            open: false,
+            todo: {}
+        })
+        setDeleteModalOpen({
             open: true,
             todo: e
         })
@@ -34,7 +48,6 @@ export default function Todo() {
                                 <tr key={i}>
                                     <td>{todo.title}</td>
                                     <td>
-                                        <button onClick={() => setDeleteModalOpen(true)}>Delete</button>
                                         <button onClick={() => handleClickEdit(todo)}>Edit</button>
                                     </td>
                                 </tr>
@@ -42,7 +55,7 @@ export default function Todo() {
                         </tbody>
                     </table>
             }
-            <EditTodoModal editModalOpen={editModalOpen} setEditModalOpen={setEditModalOpen} />
+            <EditTodoModal editModalOpen={editModalOpen} setEditModalOpen={setEditModalOpen} handleDelete={handleDelete} />
             <DeleteTodoModal deleteModalOpen={deleteModalOpen} setDeleteModalOpen={setDeleteModalOpen} />
             <AddTodoModal addModalOpen={addModalOpen} setAddModalOpen={setAddModalOpen} />
         </div>

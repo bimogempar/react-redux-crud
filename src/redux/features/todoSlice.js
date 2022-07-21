@@ -26,7 +26,9 @@ const todoSlice = createSlice({
             todo.status = status;
         },
         removeToDo(state, action) {
-            state.todos = state.todos.filter(todo => todo.id !== action.payload.id);
+            const { id } = action.payload;
+            const todo = state.todos.find(todo => todo.id === id);
+            state.todos.splice(state.todos.indexOf(todo), 1);
         }
     },
     extraReducers: {

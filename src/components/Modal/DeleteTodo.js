@@ -1,11 +1,27 @@
 import { Dialog } from '@headlessui/react'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { removeToDo } from '../../redux/features/todoSlice'
 
 export default function DeleteTodo({ deleteModalOpen, setDeleteModalOpen, }) {
+    const dispatch = useDispatch()
+    const deleteToDo = (e) => {
+        dispatch(
+            removeToDo({ id: e.id })
+        )
+        setDeleteModalOpen({
+            open: false,
+            todo: {}
+        })
+    }
+
     return (
         <Dialog
-            open={deleteModalOpen}
-            onClose={() => setDeleteModalOpen(false)}
+            open={deleteModalOpen.open}
+            onClose={() => setDeleteModalOpen({
+                open: false,
+                todo: {}
+            })}
             className="relative z-50"
         >
             {/* The backdrop, rendered as a fixed sibling to the panel container */}
@@ -18,6 +34,9 @@ export default function DeleteTodo({ deleteModalOpen, setDeleteModalOpen, }) {
                     <div className='m-5'>
                         <h1 className='text-2xl font-bold'>Edit Todo</h1>
                         Are you sure to delete this todo?
+                        <div className='flex my-4 justify-end'>
+                            <button className='bg-blue-200 p-2' onClick={() => deleteToDo(deleteModalOpen.todo)}>Yes</button>
+                        </div>
                     </div>
                 </Dialog.Panel>
                 <button></button>
