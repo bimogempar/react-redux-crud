@@ -1,5 +1,6 @@
 import { Dialog } from '@headlessui/react'
 import React, { useEffect } from 'react'
+import { FiSend } from "react-icons/fi";
 import { useDispatch } from 'react-redux'
 import { updateToDo } from '../../redux/features/todoSlice'
 
@@ -75,7 +76,7 @@ export default function EditTodo({ editModalOpen, setEditModalOpen, handleDelete
                                 <input type='text' className='w-full p-2 border border-gray-400' name="description" placeholder='Description' onChange={handleChangeDescription} value={description === undefined ? '' : description} />
                             </div>
                             <div className='flex justify-end my-4'>
-                                <button onClick={handleClickUpdateTodo} className='p-1 bg-blue-200'>Update To Do</button>
+                                <button onClick={handleClickUpdateTodo} className='p-2 bg-blue-200 mt-2 flex items-center'><FiSend />Update</button>
                             </div>
                             {errorResp && <p className="text-red-500 text-sm mb-5">{errorResp}</p>}
                         </div>

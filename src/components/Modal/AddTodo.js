@@ -2,6 +2,7 @@ import React from 'react'
 import { Dialog } from '@headlessui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToDo } from '../../redux/features/todoSlice'
+import { FiSend } from "react-icons/fi";
 
 export default function AddTodo({ addModalOpen, setAddModalOpen, }) {
     const [field, setField] = React.useState({})
@@ -63,7 +64,7 @@ export default function AddTodo({ addModalOpen, setAddModalOpen, }) {
                                 <input type='text' className='w-full p-2 border border-gray-400' name="description" placeholder='Description' onChange={setValue} />
                             </div>
                             <div className='flex justify-end my-2'>
-                                <button onClick={handleClickAddTodo} className='p-1 bg-blue-200'>Add To Do</button>
+                                <button onClick={handleClickAddTodo} className='p-2 bg-blue-200 mt-2 flex items-center'><FiSend />Add To D</button>
                             </div>
                             {errorResp && <p className="text-red-500 text-sm mb-5">{errorResp}</p>}
                         </div>
