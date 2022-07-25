@@ -60,7 +60,10 @@ export default function EditTodo({ editModalOpen, setEditModalOpen, handleDelete
                     <div className='m-5'>
                         <div className="flex justify-between">
                             <h1 className='text-2xl font-bold'>Add To Do List</h1>
-                            <button className='bg-red-300 p-2' onClick={() => handleDelete(editModalOpen.todo)}>Delete</button>
+                            {
+                                editModalOpen.todo.status === 1 ? null :
+                                    <button className='bg-red-300 p-2' onClick={() => handleDelete(editModalOpen.todo)}>Delete</button>
+                            }
                         </div>
                         <div className='mt-5'>
                             <div>
