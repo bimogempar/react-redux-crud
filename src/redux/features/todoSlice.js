@@ -25,6 +25,11 @@ const todoSlice = createSlice({
             todo.description = description;
             todo.status = status;
         },
+        updateStatusToDo(state, action) {
+            const { id, status } = action.payload;
+            const todo = state.todos.find(todo => todo.id === id);
+            todo.status = status;
+        },
         removeToDo(state, action) {
             const { id } = action.payload;
             const todo = state.todos.find(todo => todo.id === id);
@@ -45,6 +50,6 @@ const todoSlice = createSlice({
     }
 })
 
-export const { addToDo, updateToDo, removeToDo } = todoSlice.actions;
+export const { addToDo, updateToDo, removeToDo, updateStatusToDo } = todoSlice.actions;
 export default todoSlice.reducer
 

@@ -1,14 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import EditTodoModal from '../Modal/EditTodo'
 import DeleteTodoModal from '../Modal/DeleteTodo'
 import AddTodoModal from '../Modal/AddTodo'
 import { AiOutlineEdit } from "react-icons/ai";
+import { updateStatusToDo } from '../../redux/features/todoSlice'
 
 export default function Todo() {
     const { todos } = useSelector(state => state.todos)
-    // console.log(todos)
     const loading = useSelector(state => state.todos.loading)
+    const dispatch = useDispatch()
 
     const [editModalOpen, setEditModalOpen] = React.useState({
         open: false,
@@ -38,6 +39,15 @@ export default function Todo() {
         })
     }
 
+    const handleUpdateStatusTodo = (e) => {
+        dispatch(
+            updateStatusToDo({
+                id: e.id,
+                status: e.status === 1 ? 0 : 1 || e.status === 0 ? 1 : 0
+            })
+        )
+    }
+
     return (
         <div>
             <div className="flex justify-center">
@@ -50,10 +60,16 @@ export default function Todo() {
                         loading ? <div>Loading...</div> :
                             todos
                                 .filter(todo => todo.status !== 1)
-                                .map((todo, i) => (
-                                    <div key={i} className="flex justify-between space-x-24 border-2 border-gray-200 my-2 p-2">
+                                .map((todo) => (
+                                    <div key={todo.id} className="flex justify-between space-x-24 border-2 border-gray-200 my-2 p-2">
                                         <div>{todo.title}</div>
-                                        <button onClick={() => handleClickEdit(todo)}><AiOutlineEdit /></button>
+                                        <div className='space-x-4'>
+                                            <input
+                                                type="checkbox"
+                                                onChange={() => { handleUpdateStatusTodo(todo) }}
+                                            />
+                                            <button onClick={() => handleClickEdit(todo)}><AiOutlineEdit /></button>
+                                        </div>
                                     </div>
                                 ))
                     }
@@ -64,10 +80,17 @@ export default function Todo() {
                         loading ? <div>Loading...</div> :
                             todos
                                 .filter(todo => todo.status === 1)
-                                .map((todo, i) => (
-                                    <div key={i} className="flex justify-between space-x-24 border-2 border-gray-200 my-2 p-2">
+                                .map((todo) => (
+                                    <div key={todo.id} className="flex justify-between space-x-24 border-2 border-gray-200 my-2 p-2">
                                         <div>{todo.title}</div>
-                                        <button onClick={() => handleClickEdit(todo)}><AiOutlineEdit /></button>
+                                        <div className='space-x-4'>
+                                            <input
+                                                type="checkbox"
+                                                checked={todo.status === 1}
+                                                onChange={() => { handleUpdateStatusTodo(todo) }}
+                                            />
+                                            <button onClick={() => handleClickEdit(todo)}><AiOutlineEdit /></button>
+                                        </div>
                                     </div>
                                 ))
                     }
