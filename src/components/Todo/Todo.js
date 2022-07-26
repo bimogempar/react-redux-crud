@@ -60,6 +60,7 @@ export default function Todo() {
                         loading ? <div>Loading...</div> :
                             todos
                                 .filter(todo => todo.status !== 1)
+                                .sort((a, b) => a.createdAt > b.createdAt ? 1 : -1)
                                 .map((todo) => (
                                     <div key={todo.id} className="flex justify-between space-x-24 border-2 border-gray-200 my-2 p-2">
                                         <div>{todo.title}</div>
@@ -80,6 +81,7 @@ export default function Todo() {
                         loading ? <div>Loading...</div> :
                             todos
                                 .filter(todo => todo.status === 1)
+                                .sort((a, b) => a.createdAt > b.createdAt ? 1 : -1)
                                 .map((todo) => (
                                     <div key={todo.id} className="flex justify-between space-x-24 border-2 border-gray-200 my-2 p-2">
                                         <div>{todo.title}</div>
