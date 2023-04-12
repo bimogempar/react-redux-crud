@@ -55,7 +55,7 @@ export default function Todo() {
             </div>
             <div className="flex space-x-6 justify-center">
                 <div>
-                    <div className="flex justify-center text-lg mb-5 p-2 bg-red-200">Belum Selesai</div>
+                    <div className="flex justify-center text-lg mb-5 p-2 bg-yellow-200">Belum Selesai</div>
                     {
                         loading ? <div>Loading...</div> :
                             todos
